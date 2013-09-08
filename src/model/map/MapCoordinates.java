@@ -7,9 +7,20 @@ package model.map;
  *
  */
 public class MapCoordinates {
-	public int x = 0;
-	public int y = 0;
-	public int z = 0;
+	public int x;
+	public int y;
+	public int z;
+	
+	/**
+	 * @author till
+	 *
+	 * initiates all coordinates with 0
+	 */
+	public MapCoordinates() {
+		this.x = 0;
+		this.y = 0;
+		this.z = 0;
+	}
 	
 	public MapCoordinates(int x, int y, int z) {
 		this.x = x;
