@@ -1,10 +1,9 @@
-/**
- * 
- */
 package model.map;
 
 /**
  * @author till
+ * 
+ * contains public integers for x, y and z
  *
  */
 public class MapCoordinates {

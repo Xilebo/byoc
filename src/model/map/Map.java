@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model.map;
 
 import java.util.ArrayList;

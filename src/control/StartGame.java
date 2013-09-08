@@ -3,6 +3,10 @@ package control;
 import model.map.Map;
 import model.map.MapBlock;
 
+/**
+ * @author till
+ *
+ */
 public class StartGame {
 
 	/**

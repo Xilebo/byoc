@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model.map;
 
 import java.util.Vector;
@@ -59,9 +56,6 @@ public class MapBlock {
 
 	@Override
 	public String toString() {
-//		return "MapBlock [sMaterial=" + sMaterial + ", passable=" + passable
-//				+ ", solidGround=" + solidGround + ", content=" + content + "]"
-//				+ "\n";
 		String sResult;
 		if (!this.passable) {
 			sResult = "#";
