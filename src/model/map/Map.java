@@ -17,43 +17,43 @@ public class Map {
 	 */
 	private ArrayList<ArrayList<ArrayList<MapBlock>>> mapBlocks;
 	
-	public Map (int iRangeX, int iRangeY, int iRangeZ) {
-		this.mapBlocks = createEmptyZYX(iRangeX, iRangeY, iRangeZ);
+	public Map (MapCoordinates lastField) {
+		this.mapBlocks = createEmptyZYX(lastField);
 	}
 	
-	private ArrayList<ArrayList<ArrayList<MapBlock>>> createEmptyZYX(int iRangeZ, int iRangeY, int iRangeX) {
+	private ArrayList<ArrayList<ArrayList<MapBlock>>> createEmptyZYX(MapCoordinates lastField) {
 		ArrayList<ArrayList<ArrayList<MapBlock>>> tmp3d 
 			= new ArrayList<ArrayList<ArrayList<MapBlock>>>();
 		
-		for (int z = 1; z <= iRangeZ; z++) {
-			tmp3d.add(createEmptyYX(iRangeY, iRangeX));
+		for (int z = 0; z <= lastField.z; z++) {
+			tmp3d.add(createEmptyYX(lastField));
 		}
 		
 		return tmp3d;
 	}
 	
-	private ArrayList<ArrayList<MapBlock>> createEmptyYX(int iRangeY, int iRangeX) {
+	private ArrayList<ArrayList<MapBlock>> createEmptyYX(MapCoordinates lastField) {
 		ArrayList<ArrayList<MapBlock>> tmp2d = new ArrayList<ArrayList<MapBlock>>();
 		
-		for (int y = 1; y <= iRangeY; y++) {
-			tmp2d.add(createEmptyX(iRangeX));
+		for (int y = 0; y <= lastField.y; y++) {
+			tmp2d.add(createEmptyX(lastField));
 		}
 		
 		return tmp2d;
 	}
 	
-	private ArrayList<MapBlock> createEmptyX(int iRangeX) {
+	private ArrayList<MapBlock> createEmptyX(MapCoordinates lastField) {
 		ArrayList<MapBlock> tmp1d = new ArrayList<MapBlock>();
 		
-		for (int x = 1; x <= iRangeX; x++) {
+		for (int x = 0; x <= lastField.x; x++) {
 			tmp1d.add(new MapBlock());
 		}
 		
 		return tmp1d;
 	}
 	
-	public MapBlock getBlockAt(int posX, int posY, int iPosZ) {
-		return this.mapBlocks.get(posX).get(posY).get(iPosZ);
+	public MapBlock getBlockAt(MapCoordinates position) {
+		return this.mapBlocks.get(position.z).get(position.y).get(position.x);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class Map {
 		return sResult;
 	}
 
-	public String lineToString(int iCoordZ, int iCoordY) {
+	private String lineToString(int iCoordZ, int iCoordY) {
 		// TODO improve error handling 
 		if (mapBlocks.isEmpty()) return "the map is empty";
 		if (mapBlocks.size() <= iCoordZ) return "Layer does not exist";
@@ -87,14 +87,18 @@ public class Map {
 
 		String sResult = "";
 		int maxX = mapBlocks.get(iCoordZ).get(iCoordY).size();
+		MapCoordinates position = new MapCoordinates();
 		for (int iCoordX = 0; iCoordX < maxX; iCoordX++) {
-			sResult += blockToString(iCoordZ, iCoordY, iCoordX);
+			position.z = iCoordZ;
+			position.y = iCoordY;
+			position.x = iCoordX;
+			sResult += blockToString(position);
 		}
 		return sResult;
 	}
 
-	public String blockToString(int iCoordZ, int iCoordY, int iCoordX) {
-		return mapBlocks.get(iCoordZ).get(iCoordY).get(iCoordX).toString();
+	public String blockToString(MapCoordinates position) {
+		return mapBlocks.get(position.z).get(position.y).get(position.x).toString();
 	}
 
 }
