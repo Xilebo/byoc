@@ -1,6 +1,7 @@
 package control;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Vector;
@@ -16,6 +17,8 @@ import model.map.MapCoordinates;
  *
  */
 public class LoadMap {
+	
+	public static String separator = ",";
 	
 	public static Map loadCsv() {
 		Map resultMap = null;
@@ -46,45 +49,51 @@ public class LoadMap {
 	}
 	
 	public static Map loadCsv(File csvFile) {
-		Map resultMap = null;
-		BufferedReader mapFileReader = null;
-		FileReader fr = null;
-		MapCoordinates tmpCoord = null;
+		BufferedReader bufferedFileReader = null;
+		FileReader fileReader = null;
 		String line;
 		Vector<String> splitLine = new Vector<String>();
 		Vector<Vector<String>> rawMap = new Vector<Vector<String>>();
 		
-		tmpCoord = new MapCoordinates(0, 0, 0);
-		resultMap = new Map(tmpCoord);
-		
+		String sLineSplitter = "[ \t\"]*" + separator + "[ \t\"]*";
+
 		try {
-			fr = new FileReader(csvFile);
-			mapFileReader = new BufferedReader(fr);
-			line = mapFileReader.readLine();
+			fileReader = new FileReader(csvFile);
+			bufferedFileReader = new BufferedReader(fileReader);
+			line = bufferedFileReader.readLine();
 			while (line != null) {
 				splitLine.clear();
-				splitLine.copyInto(line.split(","));
+				splitLine.copyInto(line.trim().split(sLineSplitter));
 				rawMap.add(splitLine);
-				line = mapFileReader.readLine();
+				line = bufferedFileReader.readLine();
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
-			if (fr != null) {
-				try {
-					fr.close();
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-			}
-			if (mapFileReader != null) {
-				try {
-					mapFileReader.close();
-				} catch (Exception e) {
-					System.out.println(e);
-				}
+			close(fileReader);
+			close(bufferedFileReader);
+		}
+		return parseRawMap(rawMap);
+	}
+	
+	private static Map parseRawMap (Vector<Vector<String>> rawMap) {
+		Map parsedMap = null;
+		MapCoordinates tmpCoord = null;
+		tmpCoord = new MapCoordinates(0, 0, 0);
+		parsedMap = new Map(tmpCoord);
+		
+		// TODO parse
+		
+		return parsedMap;
+	}
+	
+	private static void close(Closeable toClose) {
+		if (toClose != null) {
+			try {
+				toClose.close();
+			} catch (Exception e) {
+				System.out.println(e);
 			}
 		}
-		return resultMap;
 	}
 }
