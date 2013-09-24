@@ -3,7 +3,7 @@ package model.map;
 /**
  * contains public integers for x, y and z
  *
- * @author till
+ * @author Till Hülsemann
  */
 public class MapCoordinates {
 	public int x;
