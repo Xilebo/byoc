@@ -1,7 +1,7 @@
 package model.map;
 
-import java.util.List;
-import java.util.Vector;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * a single block in a map
@@ -16,7 +16,7 @@ public class MapBlock {
 	private String sMaterial = "air";
 	private boolean passable = true;
 	private boolean solidGround = false;
-	private Vector<Object> content = new Vector<Object>();
+	private HashSet<Object> content = new HashSet<Object>();
 	
 	/**
 	 * Returns if the block is passable.
@@ -75,8 +75,8 @@ public class MapBlock {
 	 * @return a list of every object in this block
 	 * this block 
 	 */
-	public List<Object> getContent() {
-		return new Vector<Object>(content);
+	public Set<Object> getContent() {
+		return new HashSet<Object>(content);
 	}
 	
 	/**
