@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 /**
- * Map of the game 
+ * 3D Map 
  * 
  * @author till
  *
