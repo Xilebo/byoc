@@ -1,6 +1,6 @@
 package control;
 
-import model.map.Map;
+import model.map.Map3D;
 import model.map.MapBlock;
 import model.map.MapCoordinates;
 
@@ -22,7 +22,7 @@ public class StartGame {
 		int iRangeZ = 5;
 		
 		MapCoordinates lastField = new MapCoordinates(iRangeX - 1, iRangeY - 1, iRangeZ - 1);
-		Map map = new Map(lastField);
+		Map3D map = new Map3D(lastField);
 		
 		for (int iPosX = 0; iPosX < iRangeX; iPosX++) {
 			for (int iPosY = 0; iPosY < iRangeY; iPosY++) {

@@ -9,7 +9,7 @@ import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import model.map.Map;
+import model.map.Map3D;
 import model.map.MapBlock;
 import model.map.MapCoordinates;
 
@@ -25,8 +25,8 @@ public class LoadMap {
 	
 	public static String separator = ",";
 	
-	public static Map loadCsv() {
-		Map resultMap = null;
+	public static Map3D loadCsv() {
+		Map3D resultMap = null;
 		File csvFile;
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -42,8 +42,8 @@ public class LoadMap {
 		return resultMap;
 	}
 	
-	public static Map loadCsv(String pathname) {
-		Map resultMap = null;
+	public static Map3D loadCsv(String pathname) {
+		Map3D resultMap = null;
 		File csvFile = new File(pathname);
 		
 		if (csvFile.isFile()) {
@@ -53,7 +53,7 @@ public class LoadMap {
 		return resultMap;
 	}
 	
-	public static Map loadCsv(File csvFile) {
+	public static Map3D loadCsv(File csvFile) {
 		BufferedReader bufferedFileReader = null;
 		FileReader fileReader = null;
 		String line;
@@ -88,15 +88,15 @@ public class LoadMap {
 		return parseRawMap2d(rawMap);
 	}
 	
-	private static Map parseRawMap2d (Vector<Vector<String>> rawMap) {
+	private static Map3D parseRawMap2d (Vector<Vector<String>> rawMap) {
 		if (rawMap == null) return null;
 		
 		String rawContent;
 		MapBlock currentBlock;
-		Map parsedMap = null;
+		Map3D parsedMap = null;
 		MapCoordinates tmpCoord = null;
 		tmpCoord = new MapCoordinates(iSizeX - 1, iSizeY - 1, iSizeZ - 1);
-		parsedMap = new Map(tmpCoord);
+		parsedMap = new Map3D(tmpCoord);
 		
 		tmpCoord.z = 0;
 		for (tmpCoord.x = 0; tmpCoord.x < iSizeX; tmpCoord.x++) {
