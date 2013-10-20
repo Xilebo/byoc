@@ -72,7 +72,7 @@ public class MapBlock {
 	
 	/**
 	 * Get everything which is currently in this block.
-	 * @return a list of every object in this block
+	 * @return a set of every object in this block
 	 * this block 
 	 */
 	public Set<Object> getContent() {
